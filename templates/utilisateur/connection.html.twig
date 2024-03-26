@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div id="visible">
+      <div class="container-fluid col-12 mb-4 mt-1 d-flex  ">
+        <div class="col-2 d-none d-md-block ">
+           <div class="card border-0 bg-transparent  ">
+            <div class="card-body">
+               <img src="asset/cat.fond/cuisinier.png" class="card-img-top img-fluid  " alt="Cuisinier">
+             </div>
+           </div>
+        </div> 
+        <div class="col-12 col-md-5 justify-content-center mt-4 ">
+            <h2>Connection</h2>
+            <form action="{{path('app_connection')}}" method="post">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        {% if app.user %}
+            <div class="mb-3">
+                Vous êtes connecté à  {{ app.user.userIdentifier }}, <a class="titre" href="{{ path('app_logout') }}">Déconnection</a>
+            </div>
+        {% endif %}
+
+        <label for="username">Email</label>
+        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
+        <label for="password">Mot de passe</label>
+        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        {#
+            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+            See https://symfony.com/doc/current/security/remember_me.html#}
+
+            <div class="checkbox mb-3">
+                <label><input type="checkbox" name="_remember_me"> Se souvenir de moi</label>
+            </div>
+        
+
+        <button class="btn btn-dark btn-sm t mt-5" type="submit">Connection</button>
+    </form>
+
+            <h2 class="mt-5 mb-4">Vous n'avez pas encore de compte ?</h2>
+            <a class="mt-5 dark titre " href="{{ path('app_inscription')}}"><h4>Je m'inscris !</h4></a>
+   </div>
+          </div>
+  <div class="d-flex justify-content-start ml-5 mt-4">
+        
+            <a type="submit" href="{{path('app_contact')}}" class="btn btn-dark t mr-2" >Précedent</a>
+    </div>        
+      </div>
+     
+{% endblock %}
