@@ -10,11 +10,11 @@
             <div class="col-2 d-none d-md-block ">
               <div class="card border-0 bg-transparent  ">
                <div class="card-body">
-                 <img src="asset/cat.fond/cuisinier.png" class="card-img-top img-fluid" alt="Cuisinier">
+                 <img src="{{asset('asset/cat.fond/cuisinier.png')}}" class="card-img-top img-fluid" alt="Cuisinier">
                 </div>
              </div>
             </div>
-            <form action="fomulaire.php" method="POST" class="col-12 col-md-8">
+            <form  method="POST" class="col-12 col-md-8">
               <div class="form-row w-100 ">
                 <div class="col-12 col-md-6   mb-4 mt-4 ">
                  <label class="font-weight-bold  text-right">Nom</label>
@@ -57,7 +57,7 @@
               </div>
               <div class="container-fluid col-12 ">
                 <div class=" text-center ">
-                  <input name="envoyer" type="submit" id="monbouton" href="index.php?page=réclamation-envoyer" class="btn btn-dark font-weight-bold  text-right t" value="Envoyer">
+                  <input name="envoyer" type="submit" id="monbouton" href="{{path('app_formulaire')}}" class="btn btn-dark font-weight-bold  text-right t" value="Envoyer">
                 </div>
               </div>
 
