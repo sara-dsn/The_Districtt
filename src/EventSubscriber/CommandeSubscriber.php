@@ -62,11 +62,17 @@ namespace App\EventSubscriber;
         $user=$this->security->getUser();
         $mail=$user->getUserIdentifier();           
         $liste="";
-        //  $adresseLivraison=$form->get('adresseLivraison')->getData();
-        foreach($panier as $id=>$quantity){
+
+
+
+    // Récupérer l'adresse de livraison depuis la session
+    // $adresseLivraison = $session->get('adresseLivraison');
+
+            foreach($panier as $id=>$quantity){
             $plat=$this->platRepo->find($id)->getLibelle();
             $liste=$liste." ".$quantity." ".$plat." et ";
         }
+
         $email = (new Email())
         ->from('The_District@gmail.com')
         ->to($mail)
@@ -75,9 +81,8 @@ namespace App\EventSubscriber;
         //->replyTo('fabien@example.com')
         //->priority(Email::PRIORITY_HIGH)
         ->subject('Votre Commande est en préparation !')
-        ->html("Merci d'avoir commander chez nous !<br> Le livreur vous contactera quand il récéptionnera votre commande de ");
-        // .$liste." <br>  il vous la livrera au "
-        //  .$adresseLivraison." . " );
+        ->html("Merci d'avoir commander chez nous !<br> Le livreur vous contactera quand il récéptionnera votre commande de ".$liste
+        ." <br>  il vous la livrera ." );
 
         $mail=$this->mailer->send($email);
 

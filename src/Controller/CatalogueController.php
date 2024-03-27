@@ -24,7 +24,7 @@ class CatalogueController extends AbstractController
  
     
     #[Route('/', name: 'app_accueil')]
-    public function accueil(Request $request): Response
+    public function accueil(): Response
     {
         // $session=$request->getSession();
 
@@ -40,7 +40,7 @@ class CatalogueController extends AbstractController
         ]);
     }
     #[Route('/categorie', name: 'app_categorie')]
-    public function categorie(Request $request): Response
+    public function categorie(): Response
     {
 
         $categorie=$this->categorieRepo->findBy( ['active'=>1], null ,$limit='9');
@@ -50,7 +50,7 @@ class CatalogueController extends AbstractController
         ]);
     }
     #[Route('/plat', name: 'app_plat')]
-    public function plat(Request $request): Response
+    public function plat(): Response
     {
 
         $plt=$this->platRepo->findBy( ['active'=>1], null ,$limit='9');
@@ -61,34 +61,34 @@ class CatalogueController extends AbstractController
   
   
     #[Route('/politique', name: 'app_politique')]
-    public function politique(Request $request): Response
+    public function politique(): Response
     {
         return $this->render('RGPD/politique.html.twig', [
         ]);
     }
     #[Route('/mention', name: 'app_mention')]
-    public function mention(Request $request): Response
+    public function mention(): Response
     {
 
         return $this->render('RGPD/mention.html.twig', [
         ]);
     }
     #[Route('/CGU', name: 'app_CGU')]
-    public function CGU(Request $request): Response
+    public function CGU(): Response
     {
 
         return $this->render('RGPD/CGU.html.twig', [
         ]);
     }
     #[Route('/livreur', name: 'app_livreur')]
-    public function livreur(Request $request): Response
+    public function livreur(): Response
     {
-
+        
         return $this->render('message/livreur.html.twig', [
         ]);
     }
     #[Route('/demande', name: 'app_demande')]
-    public function demande(Request $request): Response
+    public function demande(): Response
     {
 
         return $this->render('message/demande.html.twig', [

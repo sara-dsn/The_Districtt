@@ -38,8 +38,15 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setRoles(['ROLE_ADMIN']);
-            // encode the plain password
+            $user->setRoles(['ROLE_CLIENT']);
+            $user->setEmail($form->get('email')->getData());
+            $user->setNom($form->get('nom')->getData());
+            $user->setPrenom($form->get('prenom')->getData());
+            $user->setAdresse($form->get('adresse')->getData());
+            $user->setCp($form->get('cp')->getData());
+            $user->setVille($form->get('ville')->getData());
+            $user->setTelephone($form->get('telephone')->getData());
+            
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,

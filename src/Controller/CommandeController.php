@@ -48,6 +48,8 @@ class CommandeController extends AbstractController
 
         // Si le formulaire est envoyé , on envoie le mail de confirmation de commande:
         if($form->isSubmitted() && $form->isValid()){
+            $adresse=$form->get('adresseLivraison')->getData();
+            $session->set('adresse',[$adresse]);
             // Pour afficher le récapitulatif du panier:
             $classe= new panierservice( $PlatRepo, $Logger);
             $fonction=$classe->list($request);
