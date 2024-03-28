@@ -20,41 +20,43 @@ class PlatRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Plat::class);
     }
-    
+
     public function BestSeller()
     {
-     return $this->createQueryBuilder('plat')
-     ->select('plat, SUM(detail.quantite) AS total') // Sélectionnez le total de la quantité de détail
-     ->join('plat.details', 'detail') // Joindre avec l'entité detail
-     ->groupBy('plat') // Regrouper par plat
-     ->orderBy('total', 'DESC') // Trier par quantité totale DESC pour obtenir les meilleurs vendeurs en premier
-     ->getQuery()
-     ->getResult();
+        return $this->createQueryBuilder('plat')
+            ->select('plat, SUM(detail.quantite) AS totalQuantite') // Sélectionnez le total de la quantité de détail
+            ->leftJoin('plat.details', 'detail') // Utilisez LEFT JOIN pour inclure les plats même s'ils n'ont pas de détails de vente
+            ->groupBy('plat') // Regrouper par plat
+            ->orderBy('totalQuantite', 'DESC') // Trier par quantité totale DESC pour obtenir les meilleurs vendeurs en premier
+            ->having('totalQuantite > 0') // Exclure les résultats avec totalQuantite de 0
+            ->setMaxResults(1) // Limiter les résultats à 10
+            ->getQuery()
+            ->getResult();
     }
- 
-//    /**
-//     * @return Plat[] Returns an array of Plat objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
 
-//    public function findOneBySomeField($value): ?Plat
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Plat[] Returns an array of Plat objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('p.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?Plat
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 
 }

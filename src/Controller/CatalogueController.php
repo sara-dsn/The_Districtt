@@ -25,18 +25,15 @@ class CatalogueController extends AbstractController
  
     
     #[Route('/', name: 'app_accueil')]
-    public function accueil(): Response
+    public function accueil(PlatRepository $platRepo): Response
     {
-        // $class=new PlatRepository(ManagerRegistry);
-        // // $session=$request->getSession();
-        // $best=$class->BestSeller();
+        $best=$platRepo->BestSeller();        
+        ddddd($best));
         $categorie=$this->categorieRepo->findBy( ['active'=>1], null ,$limit='9');
-        $plat=$this->platRepo->findBy( ['active'=>1], null ,$limit='3');
         $platsm=$this->platRepo->findBy( ['active'=>1], null ,$limit='9');
-
         return $this->render('accueil/accueil.html.twig', [
             'categorie'=>$categorie,
-            'plat'=>$plat,
+            'best'=>$best,
             'platsm'=>$platsm
 
         ]);
