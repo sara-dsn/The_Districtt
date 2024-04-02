@@ -40,19 +40,20 @@
             <div class="w-100 d-flex justify-content-center row">
     
                 <div class="row  col-10 col-md-8   ml-3 d-flex justify-content-center " >
-                    {# <?php foreach ($best as $plat) {  ?>#}
-                    {% for plt in best %}
-                        <div class="card col-12  pb-2 ml-1 mb-1 mr-1 col-md-3 position-relative ">
-                            <img class="card-img-top mt-3 img-fluid rounded himg" src="{{asset('asset/food/'~ plt.image) }}" alt="{{ plt.libelle }}">
-                            <div class="card-body ">
-                                <h5 class="card-title font-weight-bold">{{ plt.libelle }}</h5>
-                                <p class="card-text ">{{ plt.description }} <br> Menu: {{ plt.prix }} €</p><br> 
-                            </div> 
-                            <div class="  row d-flex justify-content-center">
-                            <a href="{{ path('add',{'id':plt.id}) }}"  type="submit" value="{{ plt.id }}" class="btn  col-4 t"><img class="img-fluid " src="{{asset('asset/cat.fond/panierbtn.png')}}" alt="ajouter au panier"></a>        
-                                <div><img class="img-fluid position-absolute  img-fluid col-5 mb-5 mr-5" src="asset/cat.fond/bestseller.png" alt="best seller"> </div>
-                            </div>
+                    {% for result in best %}
+                    {% set plat = result[0] %}
+                    {# {% set totalQuantite = result['totalQuantite'] %} #}
+                    <div class="card col-12  pb-2 ml-1 mb-1 mr-1 col-md-3 position-relative ">
+                        <img class="card-img-top mt-3 img-fluid rounded himg" src="{{ asset('asset/food/' ~ plat.image) }}" alt="{{ plat.libelle }}">
+                        <div class="card-body ">
+                            <h5 class="card-title font-weight-bold">{{ plat.libelle }}</h5>
+                            <p class="card-text ">{{ plat.description }} <br> Menu: {{ plat.prix }} €</p><br> 
+                        </div> 
+                        <div class="  row d-flex justify-content-center">
+                            <a href="{{ path('add',{'id': plat.id}) }}"  type="submit" value="{{ plat.id }}" class="btn  col-4 t"><img class="img-fluid " src="{{ asset('asset/cat.fond/panierbtn.png') }}" alt="ajouter au panier"></a>        
+                            <div><img class="img-fluid position-absolute  img-fluid col-5 mb-5 mr-5" src="{{ asset('asset/cat.fond/bestseller.png') }}" alt="best seller"> </div>
                         </div>
+                    </div>
                     {% endfor %}
                 </div>
             </div>   
@@ -61,17 +62,19 @@
     <div class="w-100 d-flex justify-content-center d-none d-md-none">
         <h2 class="font-weight-bold  row">Nos Best-sellers </h2>
     </div>
-    <div class=" row col-10 d-none d-md-none   ml-3 d-flex justify-content-center" > 
-        {# <?php foreach ($best as $plat) { #}
-        {% for plt in platsm %}
+    <div class=" row col-12 d-none d-md-none   ml-1 d-flex justify-content-center" > 
+        {% for plat in bestSm %}
+        {% set plt = plat[0] %}
             <div class="card col-12 mt-3 pb-2 ml-1 mb-1 mr-1 col-md-3 position-relative">
                 <img class="card-img-top img-fluid rounded himg" src="{{asset('asset/food/'~ plt.image )}}" alt="{{ plt.libelle}}">
                 <div class="card-body ">
                     <h5 class="card-title font-weight-bold">{{ plt.libelle }}</h5>
                     <p class="card-text ">{{ plt.description }} <br> Menu: {{ plt.prix }} €</p><br>
-                    {# <img class="img-fluid position-absolute  img-fluid " src="asset/cat.fond/bestseller.png" alt="best seller"> #}
                 </div>
-                <div class="mt-auto  text-center"> <a href="{{ path('add',{'id':plt.id}) }}" id="btnplt" type="submit" value="{{ plt.id }}" class="btn  col-4 t"><img class="img-fluid " src="{{asset('asset/cat.fond/panierbtn.png')}}" alt="ajouter au panier"></a></div>
+                <div class="  row d-flex justify-content-center">
+                    <a href="{{ path('add',{'id': plt.id}) }}"  type="submit" value="{{ plt.id }}" class="btn  col-4 t"><img class="img-fluid " src="{{ asset('asset/cat.fond/panierbtn.png') }}" alt="ajouter au panier"></a>        
+                    <div><img class="img-fluid position-absolute  img-fluid col-5 mb-5 mr-5" src="{{ asset('asset/cat.fond/bestseller.png') }}" alt="best seller"> </div>
+                </div>            
             </div>
         {% endfor %}
     </div>
