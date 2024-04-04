@@ -45,20 +45,19 @@ class PlatRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    //    /**
-    //     * @return Plat[] Returns an array of Plat objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    
+
+       public function search($value): array
+       {
+           return $this->createQueryBuilder('p')
+                ->Where('p.libelle LIKE :val')
+                ->orWhere('p.description LIKE :val')
+                // le symbole '%' représente n'importe quelle séquence de caractères (y compris une séquence vide).
+                ->setParameter('val', '%'.$value.'%')
+                ->getQuery()
+                ->getResult()
+           ;
+       }
 
     //    public function findOneBySomeField($value): ?Plat
     //    {

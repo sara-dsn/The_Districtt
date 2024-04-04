@@ -71,9 +71,9 @@
                     </video>
                     <div class="search-bar position-absolute">
                         <nav class="navbar navbar-light bg-transparent d-none d-md-block">
-                            <form class="form-inline">
-                                <input class="form-control mr-sm-2" type="search" name="search" placeholder="rechercher...">
-                                <button class="btn btn-outline t violet my-2 my-sm-0" href="{{ path('app_search')}}" type="button">go!</button>
+                            <form action="{{ path('app_search')}}" method="get" class="form-inline">
+                                <input class="form-control mr-sm-2" type="search" name="plat" placeholder="rechercher...">
+                                <button class="btn btn-outline t violet my-2 my-sm-0" href="{{ path('app_search')}}" type="submit">go!</button>
                             </form>
                         </nav>
                     </div>
