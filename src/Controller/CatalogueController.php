@@ -58,7 +58,16 @@ class CatalogueController extends AbstractController
             'plat'=>$plt
         ]);
     }
-  
+ // Barre de recherche
+    #[Route('/search', name:'app_search')]
+    public function search(Request $request)
+    {
+    $searchPlat=$request->query->get('plat');
+    $result=$this->platRepo->search($searchPlat);
+    // $result=$this->platRepo->findBy(['libelle'=>$searchPlat ], null);
+    return $this->render('accueil/search.html.twig',[
+        'plat'=>$result]) ;
+    }  
   
     #[Route('/politique', name: 'app_politique')]
     public function politique(): Response

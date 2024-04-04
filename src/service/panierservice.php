@@ -16,6 +16,7 @@ class panierservice extends AbstractController
         $this->platRepo = $platRepo;
         $this->logger = $logger;
     }
+   
 // Affiche le panier:
     public function list(Request $request){ 
         // on recupere la session de la requête:   
