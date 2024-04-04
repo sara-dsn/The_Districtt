@@ -13,7 +13,7 @@
             </div>
 
         </div>
-        <div class=" row col-12 col-md-8  " >
+        <div class=" row col-12 col-md-8 ml-5  " >
         {% for plt in plat %}
                 <div class="card col-12  pb-2 mb-2 ml-1  mr-2 col-md-3 ">
                     <img class="card-img-top img-fluid rounded himg" src="{{asset('asset/food/'~ plt.image) }}" alt="<?=$plat->libelle?>">
@@ -28,7 +28,7 @@
         </div>
        
         <div class="w-100 mt-3 d-flex justify-content-center"> <a type="submit" class="btn btn-dark t my-3 "  href="{{path('app_accueil')}}">Retourner sur la page d'acceuil</a></div>
-
+</div>
             
      
  
